@@ -132,16 +132,16 @@ layout
     （2）相关推荐栏 -> v-if="isSearchList"
     ```
 4. 问题1：当我聚焦后想点击推荐中的链接的时候，会先触发input事件的blur事件，才能点击，所以在点它(链接)之前,已经触发了blur事件，导致你点击这个链接，没有生效
-解决：就是我在失去焦点的时候，把isFocus的变化做个延时的处理
-    ```
-    blur: function(){
-            //setInterval和setTimeout中传入函数时，函数中的this会指向window对象，所以用self现将this存起来
-            let self = this;
-            setTimeout(function(){
-                self.focus = false
-            },200)
-        }
-    ```
+    + 解决：就是我在失去焦点的时候，把isFocus的变化做个延时的处理
+        ```
+        blur: function(){
+                //setInterval和setTimeout中传入函数时，函数中的this会指向window对象，所以用self现将this存起来
+                let self = this;
+                setTimeout(function(){
+                    self.focus = false
+                },200)
+            }
+        ```
 5. 问题2：我怎么让推荐的内容随着我的输入内容改变，怎么更改数据发出去
     + 方法1：监听v-model内容，也就是search
     + 方法2： 直接观察input事件，在input标签中增加->监听input事件
@@ -168,21 +168,21 @@ layout
     ```
 2. 鼠标划过分类项的时候绑定事件 @mouseenter="enter",
     用于取到kind值，判断当前鼠标是在哪个分类中，是美食还是酒店等等
-```
-    enter: function(e){
-        this.kind = e.target.querySelector('i').className 
-    }
-```
+    ```
+        enter: function(e){
+            this.kind = e.target.querySelector('i').className 
+        }
+    ```
 3. 鼠标离开全部分类大框后绑定事件，@mouseleave="mouseleave"
     让kind值为空，实现鼠标离开后，分类项下的组件不显示
-```
-    mouseleave(){
-        let self = this;
-        let self_time = setTimeout(function(){
-            self.kind = '';
-        },150)
-    },
-```
+    ```
+        mouseleave(){
+            let self = this;
+            let self_time = setTimeout(function(){
+                self.kind = '';
+            },150)
+        },
+    ```
 4. 分类项下的组件(详细分类)实现：我只设置一个组件，然后让数据改变，就实现了，每个详细分类都不一样的效果
     + 数据格式：
         ```
@@ -209,17 +209,17 @@ layout
         },
         ```
 5. 因为全部分类下的分类项和分类项下的组件是并行结构，也就是我要是鼠标移入到分类项下的组件部分，就算做成移出了全部分类，这样的话，依照之前的原理，mouseleave触发事件令kind值为空，组件就会不显示，也就是说，我没法实现，移动到分类项下的组件，所以要解决这个问题
-```
-<div class="detail" v-if="kind" @mouseenter="temEnter" @mouseleave="temLeave">
-给 分类项下的组件 绑定事件
-@mouseenter="temEnter"     --> 如果移入到是这个组件，就将定时器清除
-    temEnter: function(){
-        clearTimeout(this._timer),
-    },
-@mouseleave="temLeave"     --> 如果从这个组件彻底移出，那就将kind改变就可以了
-    temLeave: function(){
-        this.kind = ''
-    }
-```
+    ```
+    <div class="detail" v-if="kind" @mouseenter="temEnter" @mouseleave="temLeave">
+    给 分类项下的组件 绑定事件
+    @mouseenter="temEnter"     --> 如果移入到是这个组件，就将定时器清除
+        temEnter: function(){
+            clearTimeout(this._timer),
+        },
+    @mouseleave="temLeave"     --> 如果从这个组件彻底移出，那就将kind改变就可以了
+        temLeave: function(){
+            this.kind = ''
+        }
+    ```
 6. footer部分
 问题：
