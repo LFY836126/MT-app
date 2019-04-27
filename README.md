@@ -7,15 +7,15 @@
     + 出现问题：当更改server下面的index.js文件的时候，就是将require改为import报错
     + 原因：因为node本身不支持import这个指令，
     + 解决：使用babel
-```
-1. 在package.json文件中更改dev和start，都在配置的末尾加上--exec babel-node
-2. 建立.babelrc文件，文件内容为
-    {
-        "presets": ["es2015"]
-    }
-3. 安装插件：npm install babel-preset-es2015
-4. 重启服务 npm run dev
-```
+        ```
+        1. 在package.json文件中更改dev和start，都在配置的末尾加上--exec babel-node
+        2. 建立.babelrc文件，文件内容为
+            {
+                "presets": ["es2015"]
+            }
+        3. 安装插件：npm install babel-preset-es2015
+        4. 重启服务 npm run dev
+        ```
 3. 支持sass语法，安装插件：npm i sass-loader node-sass eslint@^3.18
 4. 支持axios  npm install @nuxtjs/axios
 ```
