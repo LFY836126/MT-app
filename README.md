@@ -18,15 +18,15 @@
         ```
 3. 支持sass语法，安装插件：npm i sass-loader node-sass eslint@^3.18
 4. 支持axios  npm install @nuxtjs/axios
-```
-nuxt.config.js:
-    modules: [
-        '@nuxtjs/axios',
-      ],
-      axios: {
-        
-      },
-```
+    ```
+    nuxt.config.js:
+        modules: [
+            '@nuxtjs/axios',
+        ],
+        axios: {
+            
+        },
+    ```
 
 ## 需求分析
 1. 模板设计：主要是解决复用性问题
@@ -112,60 +112,60 @@ layout
 1. 热门搜索：聚焦后 没有内容的时候显示热门搜索
 2. 相关搜索：聚焦后 有内容时显示相关搜索
 3. 这两个彼此独立，放在平行结构中，具体实现如下：
-        ```
-        1. 利用两个变量
-        （1）是否聚焦
-            isFocus:false,
-        （2）搜索框内容是否为空
-            search: ''
-        2. 利用计算属性监听：
-        （1）isHotPlace:function(){
-                //已经聚焦并且搜索内容为空的时候显示热门搜索
-                return this.isFocus&&!this.search
-            },
-        （2）isSearchList:function(){
-                //已经聚焦并且搜索内容不为空的时候显示热门搜索
-                return this.isFocus&&this.search
-            }
-        3. 利用v-if决定是否热门搜索要显示
-        （1）热门搜索栏 -> v-if="isHotPlace"
-        （2）相关推荐栏 -> v-if="isSearchList"
-        ```
+    ```
+    1. 利用两个变量
+    （1）是否聚焦
+        isFocus:false,
+    （2）搜索框内容是否为空
+        search: ''
+    2. 利用计算属性监听：
+    （1）isHotPlace:function(){
+            //已经聚焦并且搜索内容为空的时候显示热门搜索
+            return this.isFocus&&!this.search
+        },
+    （2）isSearchList:function(){
+            //已经聚焦并且搜索内容不为空的时候显示热门搜索
+            return this.isFocus&&this.search
+        }
+    3. 利用v-if决定是否热门搜索要显示
+    （1）热门搜索栏 -> v-if="isHotPlace"
+    （2）相关推荐栏 -> v-if="isSearchList"
+    ```
 4. 问题1：当我聚焦后想点击推荐中的链接的时候，会先触发input事件的blur事件，才能点击，所以在点它(链接)之前,已经触发了blur事件，导致你点击这个链接，没有生效
 解决：就是我在失去焦点的时候，把isFocus的变化做个延时的处理
-```
-blur: function(){
-        //setInterval和setTimeout中传入函数时，函数中的this会指向window对象，所以用self现将this存起来
-        let self = this;
-        setTimeout(function(){
-            self.focus = false
-        },200)
-    }
-```
+    ```
+    blur: function(){
+            //setInterval和setTimeout中传入函数时，函数中的this会指向window对象，所以用self现将this存起来
+            let self = this;
+            setTimeout(function(){
+                self.focus = false
+            },200)
+        }
+    ```
 5. 问题2：我怎么让推荐的内容随着我的输入内容改变，怎么更改数据发出去
     + 方法1：监听v-model内容，也就是search
     + 方法2： 直接观察input事件，在input标签中增加->监听input事件
 
 #### 全部分类部分
 1. 将鼠标划过显示出的部分，单独放在一个组件里，组件里显示什么数据(curdetail.child)，由鼠标划过的kind值决定
-```
-<dl class="nav" @mouseleave="mouseleave">
-    <dt>全部分类</dt>
-        //在全部分类部分这样遍历
-    <dd v-for="(item, index) in menu" :key="index" @mouseenter="enter">
-        <i :class="item.type"/>{{item.name}} <span class="arrow"/>
-    </dd>
-</dl>
-<div class="detail" v-if="kind">
-        //在每个分类子项这样遍历
-    <template v-for="(item,index) in curdetail.child">
-        <h4 :key="index">{{item.title}}</h4>
-        <span v-for="v in item.child" :key="v">
-            {{v}}
-        </span>
-    </template>
-</div>
-```
+    ```
+    <dl class="nav" @mouseleave="mouseleave">
+        <dt>全部分类</dt>
+            //在全部分类部分这样遍历
+        <dd v-for="(item, index) in menu" :key="index" @mouseenter="enter">
+            <i :class="item.type"/>{{item.name}} <span class="arrow"/>
+        </dd>
+    </dl>
+    <div class="detail" v-if="kind">
+            //在每个分类子项这样遍历
+        <template v-for="(item,index) in curdetail.child">
+            <h4 :key="index">{{item.title}}</h4>
+            <span v-for="v in item.child" :key="v">
+                {{v}}
+            </span>
+        </template>
+    </div>
+    ```
 2. 鼠标划过分类项的时候绑定事件 @mouseenter="enter",
     用于取到kind值，判断当前鼠标是在哪个分类中，是美食还是酒店等等
 ```
@@ -185,29 +185,29 @@ blur: function(){
 ```
 4. 分类项下的组件(详细分类)实现：我只设置一个组件，然后让数据改变，就实现了，每个详细分类都不一样的效果
     + 数据格式：
-```
-{
-    type:'food', 
-    name:'美食',
-    id:11,
-    child:[
+        ```
         {
-            title:'美食',
-            child:['火锅', '汉堡', '小龙虾', '烤冷面', '小可爱']
-        }
-    ]
-},
-```
+            type:'food', 
+            name:'美食',
+            id:11,
+            child:[
+                {
+                    title:'美食',
+                    child:['火锅', '汉堡', '小龙虾', '烤冷面', '小可爱']
+                }
+            ]
+        },
+        ```
     + 展示在详细分类里的数据curdetail.child，放在计算属性中，这样，kind改变就能触发这个值的改变
-```
-computed:{
-    curdetail: function(){
-                    // 设置过滤器  ->  取到所有type和kind相等数据中的第一个
-        let res = this.menu.filter(item => item.type === this.kind)[0]
-        return res
-    }
-},
-```
+        ```
+        computed:{
+            curdetail: function(){
+                            // 设置过滤器  ->  取到所有type和kind相等数据中的第一个
+                let res = this.menu.filter(item => item.type === this.kind)[0]
+                return res
+            }
+        },
+        ```
 5. 因为全部分类下的分类项和分类项下的组件是并行结构，也就是我要是鼠标移入到分类项下的组件部分，就算做成移出了全部分类，这样的话，依照之前的原理，mouseleave触发事件令kind值为空，组件就会不显示，也就是说，我没法实现，移动到分类项下的组件，所以要解决这个问题
 ```
 <div class="detail" v-if="kind" @mouseenter="temEnter" @mouseleave="temLeave">
