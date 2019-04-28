@@ -70,8 +70,11 @@ components
             index.vue           -->底部部分
 pages
     index.vue                   -->中间部分
+    register.vue                -->注册组件
+    login.vue                   -->登录组件
 layout
     default.vue                 -->最终显示页面
+    blank.vue                   -->放置register.vue的模版文件
 
 nuxt.config.js          配置文件：可以引入项目所需文件，像css文件，还可以配置很多其他文件
 
@@ -221,5 +224,3 @@ layout
             this.kind = ''
         }
     ```
-6. footer部分
-问题：
