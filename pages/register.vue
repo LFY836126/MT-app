@@ -44,11 +44,13 @@
     </div>
 </template>
 <script>
+import CryptoJS from 'crypto-js'
 export default {
     layout:'blank',
     data(){
         return{
             statusMsg:'',
+            error:'',
             ruleForm:{
                 name:'',
                 code:'',
@@ -93,17 +95,101 @@ export default {
                         }else{
                             callback()
                         }
-                    }
+                    },
+                    trigger:'blur'
                 }]     
             }
         }
     },
     methods:{
-        sendMsg: function(){},
-        register: function(){}
+        sendMsg: function(){
+            const self = this;
+            let namePass;
+            let emailPass;
+            if(self.timerid){
+                return false
+            }
+            // 验证用户名有没有通过规则校验，有值表示错误，没有表示正确
+            this.$refs['ruleForm'].validateField('name', (valid) =>{  
+                namePass = valid
+            })
+            self.statusMsg = '';
+            // 如果没有通过，那就不再往下检查
+            if(namePass){   //有值表示错误
+                return false
+            }
+            // 如果通过了，再检查邮箱是否符合规则
+            // 这个方法是element-ui提供的方法
+            this.$refs['ruleForm'].validateField('email', (valid) =>{
+                emailPass = valid;
+            })
+            // 这两个值都通过的情况下
+            if(!namePass && !emailPass){
+                self.$axios.post('/users/verify', {
+                    // 拿到用户输入的值
+                    username: encodeURIComponent(self.ruleForm.name),
+                    email: self.ruleForm.email
+                }).then(({
+                    // 解构赋值
+                    status, 
+                    data
+                }) =>{
+                    // console.log(status, data, data.code);
+                    // 连接成功，验证码发送成功
+                    if(status === 200 && data && data.code === 0){
+                        let count = 60;
+                        self.statusMsg = `验证码已发送，剩余${count--}秒`
+                        // 定时器
+                        self.timerid = setInterval(function(){
+                            self.statusMsg = `验证码已发送，剩余${count--}秒`
+                            if(count === 0){
+                                clearInterval(self.timerid)
+                            }
+                        },1000)
+                    // 如果没成功
+                    }else{
+                        self.statusMsg = data.msg
+                    }
+                })
+            }
+        },
+        register: function(){
+            let self = this;
+            //  验证所有校验逻辑是否通过，如果valid是true的话，那么校验规则都有效
+            this.$refs['ruleForm'].validate((valid)=>{
+                if(valid){
+                    // 发起注册接口动作
+                    self.$axios.post('/users/signup', {
+                        // 将username进行编码，因为username有可能是中文名称
+                        username: window.encodeURIComponent(self.ruleForm.name),
+                        // 将密码进行加密，利用crypto-js,这个库是非常常见的与加密有关的库,先下载(npm i crypto-js)再引进(import CryptoJS from 'crypto-js')
+                        // 利用MD5将密码进行加密，不过加密后返回来的是数组，所以一定要用toString方法
+                        password: CryptoJS.MD5(self.ruleForm.pwd).toString(),
+                        email: self.ruleForm.email,
+                        code: self.ruleForm.code
+                    }).then(({status, data}) =>{
+                        if(status === 200){
+                            if(data && data.code === 0){
+                                // 注册完了，强制跳转到登录页面
+                                location.href = '/login'
+                            }else{
+                                self.error = data.msg
+                            }
+                        }else{
+                            self.error = `服务器出错，错误码${status}`
+                        }
+                        // 定时清空error
+                        setTimeout(function(){
+                            self.error = '';
+                        }, 1500)
+                    })
+                }
+            })
+        }
     }
 }
 </script>
 <style lang="scss">
     @import "@/assets/css/register/index.scss";
+    // 836126515@qq.com
 </style>

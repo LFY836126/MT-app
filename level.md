@@ -75,6 +75,13 @@ pages
 layout
     default.vue                 -->最终显示页面
     blank.vue                   -->放置register.vue的模版文件
+server
+    dbs
+        models                  -->放置数据库数据的
+            user.js
+        config.js               -->数据库配置文件
+    interface
+        index.js                -->支持数据据库连接的接口文件
 
 nuxt.config.js          配置文件：可以引入项目所需文件，像css文件，还可以配置很多其他文件
 
@@ -224,3 +231,16 @@ layout
             this.kind = ''
         }
     ```
+#### 数据库配置
+1. 
+
+#### 城市服务接口
+1. getPosition: 在接口发出请求到服务端，服务端根据当前的ip来查库，给出你当前城市的名称
+2. province 获取省份的接口
+3. province/:id :给出你指定的id的省份，每一个省份都有一个对应的id，根据id可以查询到这个省份下面所有管辖的城市
+4. city: 获取所有城市（不是按省份分类的城市）
+5. hotCity: 获取热门城市
+6. menu: 获取全部分类下的菜单数据
+
+#### 查询类、接口
+1.
