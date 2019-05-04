@@ -73,7 +73,7 @@ router.post('/signup', async(ctx) =>{
         password,
         email,
     })
-    console.log('success')
+    // console.log('success')
     // 判断是否成功写库
     if(nuser){
     // 如果写库成功，进行自动登录动作
@@ -82,7 +82,7 @@ router.post('/signup', async(ctx) =>{
             password
         })
         // 如果成功
-        console.log(res.data);
+        // console.log(res.data);
         if(res.data&&res.data.code === 0){
             ctx.body = {
                 code:0,
