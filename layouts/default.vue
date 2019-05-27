@@ -12,7 +12,7 @@
   </el-container>
 </template>
 
-<script>
+<script> 
 import myHeader from '@/components/public/header/index.vue';
 import myFooter from '@/components/public/footer/index.vue';
 export default {

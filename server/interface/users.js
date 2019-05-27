@@ -57,7 +57,6 @@ router.post('/signup', async(ctx) =>{
     let user = await User.find({
         username,
     })
-    console.log(user);
     // 因为这个是注册接口，如果已经被注册了就返回-1
     if(user.length){
         ctx.body = {

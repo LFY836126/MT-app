@@ -3,19 +3,20 @@
       <section class='m-istyle'>
           <dl @mouseover="over">
             <dt>有格调</dt>
-            <dd :class="{active:kind === 'all'}" kind="all">全部</dd>
-            <dd :class="{active:kind === 'part'}" kind="part">约会</dd>
-            <dd :class="{active:kind === 'spa'}" kind="spa">spa</dd>
-            <dd :class="{active:kind === 'movie'}" kind="movie">电影</dd>
+            <dd :class="{active:kind === 'all'}" keyword="景点" kind="all">全部</dd>
+            <dd :class="{active:kind === 'part'}" keyword="美食" kind="part">约会</dd>
+            <dd :class="{active:kind === 'spa'}" keyword="丽人" kind="spa">spa</dd>
+            <dd :class="{active:kind === 'movie'}" keyword="电影" kind="movie">电影</dd>
+            <dd :class="{active:kind==='travel'}" keyword="旅游" kind="travel">品质出游</dd>
           </dl>
           <ul class="ibody">
             <li v-for="item in cur" :key="item.title">
               <el-card :body-style="{ padding: '0px' }" shadow="never">
-                <img :src="item.imgUrl" class="image">
+                <img :src="item.img" class="image">
                 <ul class="cbody">
                   <li class="title">{{item.title}}</li>
                   <li class="pos">{{item.detail}}</li>
-                  <li class="price">￥{{item.price}}起</li>
+                  <li class="price">{{item.price}}</li>
                 </ul>
               </el-card>
             </li>
@@ -29,45 +30,7 @@ export default {
       return{
         kind:'all',
         list:{
-          all: [
-            {
-              title:'必胜客',
-              location:'国际会展中心',
-              price:'159',
-              imgUrl:'//p1.meituan.net/msmerchant/e79b718e32bdf3e2f2da447001a68d5d1591138.jpg@460w_260h_1e_1c',
-              detail:'超值丰盛2人惨',
-            },
-            {
-              title:'好利来',
-              location:'太平桥',
-              price:'159',
-              imgUrl:'//p1.meituan.net/msmerchant/e79b718e32bdf3e2f2da447001a68d5d1591138.jpg@460w_260h_1e_1c',
-              detail:'超值丰盛2人惨',
-            },
-            {
-              title:'米奇',
-              location:'私人蛋糕',
-              price:'159',
-              imgUrl:'//p1.meituan.net/msmerchant/e79b718e32bdf3e2f2da447001a68d5d1591138.jpg@460w_260h_1e_1c',
-              detail:'[超值丰盛2人惨]',
-            }
-          ],
-          part: [
-            {
-              title:'精美饰品',
-              location:'人民币',
-              price:'159',
-              imgUrl:'//p1.meituan.net/msmerchant/e79b718e32bdf3e2f2da447001a68d5d1591138.jpg@460w_260h_1e_1c',
-              detail:'[超值丰盛2人惨]',
-            },
-            {
-              title:'艺术蛋糕',
-              location:'南岗区',
-              price:'159',
-              imgUrl:'//p1.meituan.net/msmerchant/e79b718e32bdf3e2f2da447001a68d5d1591138.jpg@460w_260h_1e_1c',
-              detail:'[超值丰盛2人惨]',
-            }
-          ]
+          all: []
         }
       }
     },
@@ -77,9 +40,75 @@ export default {
       }
     },
     methods:{
-      over: function(e){
-        this.kind = e.target.querySelector('dd');
+      over: async function(e){
+          let dom = e.target
+          let tag = dom.tagName.toLowerCase()
+          let self = this
+          if (tag === 'dd') {
+            this.kind = dom.getAttribute('kind')
+            let keyword = dom.getAttribute('keyword')
+            let {status, data:{count, pois}} = await self.$axios.get('/search/resultsByKeywords', {
+              params: {
+                city: self.$store.state.geo.position.city,
+                keyword,
+              }
+            })
+            if(status === 200 && count > 0){
+              // 做一个过滤，数据必须有图片
+              // 开发时候用自己的字段，然后和后端做数据结合的时候，做一层map映射，避免后端再修改，自己需要做很大的改动
+            //   let r = pois.filter(item => item.photos.length).map(item =>{
+            //     return {
+            //       title: item.name,
+            //       pos: item.type.split(';')[0],
+            //       price: item.biz_ext.cost || '暂无 ',
+            //       img: item.photos[0].url,
+            //       url:'//abc.com'
+            //      }
+            //     })
+            //     self.list[self.kind] = r.slice(0, 9)
+            //   }else{
+            //     self.list[self.kind] =[];
+            // }
+            let r= pois.filter(item=>item.photos.length).map(item=>{
+            return {
+              title:item.name,
+              pos:item.type.split(';')[0],
+              price:item.biz_ext.cost != ''? item.biz_ext.cost:'暂无',
+              img:item.photos[0].url,
+              url:'//abc.com'
+            }
+          })
+          self.list[self.kind]=r.slice(0,9)
+          }else{
+            self.list[self.kind]=[]
+          }
+          }
       }
+    },
+    async mounted(){
+      let self = this;
+      let {status, data:{count, pois}} = await self.$axios.get('/search/resultsByKeywords', {
+              params: {
+                city: self.$store.state.geo.position.city,
+                keyword: '景点'
+              }
+            })
+            if(status === 200 && count > 0){
+              // 做一个过滤，数据必须有图片
+              // 开发时候用自己的字段，然后和后端做数据结合的时候，做一层map映射，避免后端再修改，自己需要做很大的改动
+              let r = pois.filter(item => item.photos.length).map(item =>{
+                return {
+                  title: item.name,
+                  pos: item.type.split(';')[0],
+                  price: item.biz_ext.cost == ''? '暂无':`￥${item.biz_ext.cost}/起`,
+                  img: item.photos[0].url,
+                  url:'//abc.com'
+                 }
+                })
+                self.list[self.kind] = r.slice(0, 9)
+              }else{
+                self.list[self.kind] =[];
+            }
     }
 }
 </script>

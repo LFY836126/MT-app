@@ -4,7 +4,7 @@ const instance = axios.create({
     //{process.env.POST||3000}：判断端口，如果没有的话，设置为3000
     baseURL: `http://${process.env.HOST||'localhost'}:${process.env.PORT||3000}`,
     // 设置超时
-    timeout:1000,
+    timeout:2000,
     headers:{
 
     }

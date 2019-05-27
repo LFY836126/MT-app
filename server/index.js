@@ -14,6 +14,7 @@ import dbConfig from './dbs/config'
 import passport from './interface/utils/passport'
 import users from './interface/users'
 import geo from './interface/geo'
+import search from './interface/search'
 
 const app = new Koa()
 const host = process.env.HOST || '127.0.0.1';
@@ -62,6 +63,7 @@ async function start() {
 // 引入路由，放置在这里，要不然可能会失效
   app.use(users.routes()).use(users.allowedMethods())
   app.use(geo.routes()).use(geo.allowedMethods())
+  app.use(search.routes()).use(search.allowedMethods())
   app.use(ctx => {
     ctx.status = 200
     ctx.respond = false // Bypass Koa's built-in response handling
