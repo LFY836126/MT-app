@@ -87,7 +87,6 @@ router.get('/resultsByKeywords', async (ctx) =>{
             sign
         }
     })
-    console.log()
     ctx.body = {
         count: status === 200? count: 0,
         pois : status ===200? pois : [],
