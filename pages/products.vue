@@ -42,19 +42,25 @@ export default {
   // 通过ssr方式去拿数据
   async asyncData(ctx){
     let keyword = ctx.query.keyword;
-    let city = ctx.store.state.geo.position.city;
+    let city = ctx.store.state.geo.position.city.replace('市','') || "哈尔滨";
     let {status,data:{count,pois}} = await ctx.$axios.get('/search/resultsByKeywords',{
       params:{
         keyword,
         city,
       }
     })
-    let {status:status2,data:{areas,types}} = await ctx.$axios.get('/categroy/crumbs',{
-        params:{
-          city,
-        }
+    let {status:status2,data:{areas,types}} = await ctx.$axios.get('http://cp-tools.cn/categroy/crumbs',{
+    params:{
+      // city:ctx.query.city.replace('市','') || "北京",
+      city,
+      sign:'3e59babc3d4d2e7bc9a5b4fe302d574e',
       }
-    )
+    })
+    // let {status:status2,data:{areas,types}} = await ctx.$axios.get('/categroy/crumbs',{
+    //   params:{
+    //     city
+    //   }
+    // })
      if(status===200&&count>0&&status2===200){
       return {
         // 将后端返回的数据进行映射，前端有前端的数据格式，后端有后端的格式，要进行过滤并且映射
@@ -75,7 +81,7 @@ export default {
         }),
         // 因为asyncData的返回值是和data做融合的，所以这里这样写就相当于课data中的keywords赋值了
         keyword,
-        // 过滤并且做截断
+        // // 过滤并且做截断
         areas: areas.filter(item=>item.type!=='').slice(0,5),
         types: types.filter(item=>item.type!=='').slice(0,5),
 
