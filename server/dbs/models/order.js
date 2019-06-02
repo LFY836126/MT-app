@@ -5,6 +5,10 @@ const Order = new Schema({
     type: String,
     require: true
   },
+  count: {
+    type: Number,
+    require: true
+  },
   // 用户
   user:{
     type:String,

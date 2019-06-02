@@ -11,7 +11,7 @@
             <p>数量: {{ item.count }}</p>
           </el-col>
           <el-col :span="4">
-            总价: $ {{ item.total }}
+            总价: ￥ {{ item.total }}
           </el-col>
           <el-col :span="6">
             {{ item.statusTxt }}

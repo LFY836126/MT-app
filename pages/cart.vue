@@ -30,12 +30,14 @@ export default {
         }
     },
     methods:{
-        async submit(){
+        submit: async function(){
             const { status, data: { code, id }} = await this.$axios.post('/order/createOrder', {
-                count: this.cart[0].count,
+                id: this.cartNo,
                 price: this.cart[0].price,
-                id: this.cartNo
+                count: this.cart[0].count
             })
+            // console.log('status');
+            console.log(this.cartNo + "  " + this.cart[0].price+ "  " +this.cart[0].count);
             if (status === 200 && code === 0) {
                 this.$alert(`恭喜您，已成功下单，订单号:${id}`, '下单成功', {
                 confirmButtonText: '确定',
@@ -54,11 +56,6 @@ export default {
                 total += item.price * item.count;
             })
             return total
-        }
-    },
-    methods:{
-        submit(){
-
         }
     },
     async asyncData(ctx) {

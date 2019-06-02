@@ -10,6 +10,7 @@ const router = new Router({ prefix: '/order' })
 // 创建订单
 router.post('/createOrder', async(ctx) => {
   const { id, price, count } = ctx.request.body
+  // console.log(id + " " + price + " " + count);
   const time = Date()
   const orderID = md5(Math.random() * 1000 + time).toString()
   // isAuthenticated 是否登录
@@ -28,7 +29,7 @@ router.post('/createOrder', async(ctx) => {
       time,
       user: ctx.session.passport.user,
       name: findCart.detail[0].name,
-      imsg: findCart.detail[0].imgs,
+      imgs: findCart.detail[0].imgs,
       status: 0
     })
     // 订单创建成功，入库

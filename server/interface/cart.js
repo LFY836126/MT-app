@@ -48,7 +48,7 @@ router.post('/create', async ctx => {
 // 获取购物车信息接口
 router.post('/getCart', async ctx => {
   let {id} = ctx.request.body
-  console.log(id);
+  // console.log(id);
   // try容错处理，对比上面的result新写法
   try {
     let result = await Cart.findOne({cartNo: id})
