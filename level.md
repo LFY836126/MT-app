@@ -63,95 +63,95 @@
     + koa-route: `https://www.jianshu.com/p/0d59a4270997`
     + 实战笔记：`https://www.cnblogs.com/xiaozhumaopao`
 2. 
-```
-components
-    changeCity                  -->城市选择页面的所有
-        iselect.vue             -->按省份选择等，那一栏的
-        hot.vue                 -->热门城市 那栏
-        categroy.vue            -->按拼音首字母选择 那栏
-    products                    -->产品列表页，就是点击搜索出来的页面
-        categroy.vue            -->分类，区域的部分
-        crumbs.vue              -->中间哈尔滨美团>哈尔滨失恋博物馆 
-        iselect.vue             -->分类,区域栏中偏右边的部分，像周边游，香坊区等部分
-        list.vue                -->
-        product.vue             -->
-    detail                      -->产品详情页，就是点击产品出现的页面
-        crumbs.vue              -->
-        item.vue                -->
-        list.vue                -->
-        summary.vue             -->
-    index
-        artistic.vue            -->页面下半部分，有格调的那个部分
-        life.vue                -->中间包括轮播图的那部分，几乎全是图片的部分
-        menu.vue                -->全部分类部分
-        silder.vue              -->单独的轮播图组件，在life.vue文件中引用
-    public
-        header                  -->包括搜索框往上面的部分
-            index.vue           -->用于导出header下的其他组件
-            nav.vue             -->页面右上角，什么我的美团，网址导航那部分
-            searchbar.vue       -->整个搜索框部分
-            topbar.vue          -->除了搜索框的所有顶部部分
-            user.vue            -->用户登陆注册部分
-            geo.vue             -->页面左上角，城市切换部分
-        footer                  
-            index.vue           -->底部部分
-pages
-    index.vue                   -->中间部分
-    register.vue                -->注册组件
-    login.vue                   -->登录组件
-    exit.vue                    -->退出组件
-    register.vue                -->注册组件
-    changeCity                  -->城市选择组件
-    products.vue                -->产品列表页
-    detail.vue                  -->产品详情页
-layout
-    default.vue                 -->最终显示页面
-    blank.vue                   -->放置register.vue，login，exit的模版文件
-server
-    dbs
-        models                  -->放置数据库数据
-            user.js             -->users表，包括usename，password，email
-            categroy.js
-            city.js
-            menu.js
-            poi.js
-            province.js
-        config.js               -->数据库配置文件(smtp服务, redis连接, mongodb连接)
-    interface
-        utils
-            axios.js            -->定义axios的配置项
-            passport.js         -->利用koa-passport简便的实现登录注册功能(序列化，反序列化，local策略)
-        users.js                --> 登录系列接口定义(登录，退出，获取用户名，注册，验证等)
-        geo.js                  -->城市，系列接口定义(获取所有城市，热门城市，获取省份等)
-    index.js                    -->定义支持服务的接口文件(passport, session, 路由, 数据库， 处理post请求等)
-store 
-    modules                     -->vuex子模块
-        geo.js                  -->当前城市
-        home.js                 -->全部分类下的详细分类
-    index.js                    -->vuex模块(汇总子模块并且定义一些操作)
+    ```
+    components
+        changeCity                  -->城市选择页面的所有
+            iselect.vue             -->按省份选择等，那一栏的
+            hot.vue                 -->热门城市 那栏
+            categroy.vue            -->按拼音首字母选择 那栏
+        products                    -->产品列表页，就是点击搜索出来的页面
+            categroy.vue            -->分类，区域的部分
+            crumbs.vue              -->中间哈尔滨美团>哈尔滨失恋博物馆 
+            iselect.vue             -->分类,区域栏中偏右边的部分，像周边游，香坊区等部分
+            list.vue                -->
+            product.vue             -->
+        detail                      -->产品详情页，就是点击产品出现的页面
+            crumbs.vue              -->
+            item.vue                -->
+            list.vue                -->
+            summary.vue             -->
+        index
+            artistic.vue            -->页面下半部分，有格调的那个部分
+            life.vue                -->中间包括轮播图的那部分，几乎全是图片的部分
+            menu.vue                -->全部分类部分
+            silder.vue              -->单独的轮播图组件，在life.vue文件中引用
+        public
+            header                  -->包括搜索框往上面的部分
+                index.vue           -->用于导出header下的其他组件
+                nav.vue             -->页面右上角，什么我的美团，网址导航那部分
+                searchbar.vue       -->整个搜索框部分
+                topbar.vue          -->除了搜索框的所有顶部部分
+                user.vue            -->用户登陆注册部分
+                geo.vue             -->页面左上角，城市切换部分
+            footer                  
+                index.vue           -->底部部分
+    pages
+        index.vue                   -->中间部分
+        register.vue                -->注册组件
+        login.vue                   -->登录组件
+        exit.vue                    -->退出组件
+        register.vue                -->注册组件
+        changeCity                  -->城市选择组件
+        products.vue                -->产品列表页
+        detail.vue                  -->产品详情页
+    layout
+        default.vue                 -->最终显示页面
+        blank.vue                   -->放置register.vue，login，exit的模版文件
+    server
+        dbs
+            models                  -->放置数据库数据
+                user.js             -->users表，包括usename，password，email
+                categroy.js
+                city.js
+                menu.js
+                poi.js
+                province.js
+            config.js               -->数据库配置文件(smtp服务, redis连接, mongodb连接)
+        interface
+            utils
+                axios.js            -->定义axios的配置项
+                passport.js         -->利用koa-passport简便的实现登录注册功能(序列化，反序列化，local策略)
+            users.js                --> 登录系列接口定义(登录，退出，获取用户名，注册，验证等)
+            geo.js                  -->城市，系列接口定义(获取所有城市，热门城市，获取省份等)
+        index.js                    -->定义支持服务的接口文件(passport, session, 路由, 数据库， 处理post请求等)
+    store 
+        modules                     -->vuex子模块
+            geo.js                  -->当前城市
+            home.js                 -->全部分类下的详细分类
+        index.js                    -->vuex模块(汇总子模块并且定义一些操作)
 
-redis启动->找到安装目录(develop)->redis-server
-mongoose启动->找到安装目录(develop)->mongod
+    redis启动->找到安装目录(develop)->redis-server
+    mongoose启动->找到安装目录(develop)->mongod
 
-支付逻辑在13-1的7.06分处，可以自己写
+    支付逻辑在13-1的7.06分处，可以自己写
 
-nuxt.config.js          配置文件：可以引入项目所需文件，像css文件，还可以配置很多其他文件
+    nuxt.config.js          配置文件：可以引入项目所需文件，像css文件，还可以配置很多其他文件
 
-补充一个：
-layout
-    default.vue：
-        <template>
-          <el-container class="layout-default">
-            <el-header height="197px">
-              <myHeader></myHeader>                 ---> public/header/index.vue
-            </el-header>
-            <el-main>
-              <nuxt/>                               ---> pages/index.vue
-            </el-main>
-            <el-footer>Footer</el-footer>           ---> public/footer/index.vue
-          </el-container>
-        </template>
-```
+    补充一个：
+    layout
+        default.vue：
+            <template>
+            <el-container class="layout-default">
+                <el-header height="197px">
+                <myHeader></myHeader>                 ---> public/header/index.vue
+                </el-header>
+                <el-main>
+                <nuxt/>                               ---> pages/index.vue
+                </el-main>
+                <el-footer>Footer</el-footer>           ---> public/footer/index.vue
+            </el-container>
+            </template>
+    ```
 
 #### 右上角->我的美团，手机app，商家中心，网址导航
 1. 思考
@@ -293,12 +293,12 @@ layout
 /users/getUser          登陆状态获取用户名
 ```
 1. 问题1：
-```
-问：退出(exit.vue)组件中，为什么用中间件来实现退出操作呢，
-答： 因为，我们要求到达退出页面之后，自动的去执行，而不是像按了什么按钮去执行，
-    所以利用middleware机制，触发这个获取退出的接口，让这个接口响应完之后，
-    我们再做自动化的执行动作
-```
+    ```
+    问：退出(exit.vue)组件中，为什么用中间件来实现退出操作呢，
+    答： 因为，我们要求到达退出页面之后，自动的去执行，而不是像按了什么按钮去执行，
+        所以利用middleware机制，触发这个获取退出的接口，让这个接口响应完之后，
+        我们再做自动化的执行动作
+    ```
 
 #### 城市服务接口
 ```
@@ -328,32 +328,32 @@ layout
     + axios.post是发送数据的
     + router.get/post是定义我当前路由(页面)操作的，比如我在这个页面返回别人数据，或者我定义个加减乘除操作啥的
 7. 流程：
-```
-store 
-    modules                     -->vuex子模块
-        geo.js                  -->当前城市
-        home.js                 -->全部分类下的详细分类
-    index.js                    -->vuex模块(汇总子模块并且定义一些操作)
+    ```
+    store 
+        modules                     -->vuex子模块
+            geo.js                  -->当前城市
+            home.js                 -->全部分类下的详细分类
+        index.js                    -->vuex模块(汇总子模块并且定义一些操作)
 
-1. 先定义子模块(geo.js/home.js等),子模块内容包括state,mutations,actions
-2. 在父模块中(index.js)引入子模块
-3. 父模块中actions部分
-    注意1：nuxtServerInit({commit}, {req, app}){}
-    注意2：const {status, data: {province, city}} = await app.$axios.get('/geo/getPosition')  => 通过接口返回数据
-    注意3： commit('geo/setPosition', status === 200?{city, province}:{city: '', province: ''})   => 将获得数据传入Vuex子模块，然后前端页面就可以获得数据了
-    注意4： /geo/getPosition   => 接口(server/interface/geo.js)，返回给我们的数据也是通过axios获取的：await axios.get(`http://cp-tools.cn/geo/getPosition?sign=${sign}`)
-    actions: {
-            // 见Nuxt工作流
-            async nuxtServerInit({commit}, {req, app}){
-                // 1. 请求接口，请求axios类库，为什么写app呢，因为这个时候没有dom实例，拿不到类似对象，拿不到vue实例，只能拿到app，axios类库也是挂载到app下面的，虽然拿不到vue实例对象，但是可以拿到app实例，这个时候可以拿到asyncData的
-                const {status, data: {province, city}} = await app.$axios.get('/geo/getPosition')
-                // console.log(province, city);
-                // 利用vuex做提交，
-                commit('geo/setPosition', status === 200?{city, province}:{city: '', province: ''})
-                // 在接口中已经做过一次检查了，为什么要再次做检查：因为那个检查是在服务端做的，这个检查是在客户端做的，那个检查是保证通信时200的时候，那个检查不影响我们浏览器端，所以安全起见，还是要再做一次这个事情
+    1. 先定义子模块(geo.js/home.js等),子模块内容包括state,mutations,actions
+    2. 在父模块中(index.js)引入子模块
+    3. 父模块中actions部分
+        注意1：nuxtServerInit({commit}, {req, app}){}
+        注意2：const {status, data: {province, city}} = await app.$axios.get('/geo/getPosition')  => 通过接口返回数据
+        注意3： commit('geo/setPosition', status === 200?{city, province}:{city: '', province: ''})   => 将获得数据传入Vuex子模块，然后前端页面就可以获得数据了
+        注意4： /geo/getPosition   => 接口(server/interface/geo.js)，返回给我们的数据也是通过axios获取的：await axios.get(`http://cp-tools.cn/geo/getPosition?sign=${sign}`)
+        actions: {
+                // 见Nuxt工作流
+                async nuxtServerInit({commit}, {req, app}){
+                    // 1. 请求接口，请求axios类库，为什么写app呢，因为这个时候没有dom实例，拿不到类似对象，拿不到vue实例，只能拿到app，axios类库也是挂载到app下面的，虽然拿不到vue实例对象，但是可以拿到app实例，这个时候可以拿到asyncData的
+                    const {status, data: {province, city}} = await app.$axios.get('/geo/getPosition')
+                    // console.log(province, city);
+                    // 利用vuex做提交，
+                    commit('geo/setPosition', status === 200?{city, province}:{city: '', province: ''})
+                    // 在接口中已经做过一次检查了，为什么要再次做检查：因为那个检查是在服务端做的，这个检查是在客户端做的，那个检查是保证通信时200的时候，那个检查不影响我们浏览器端，所以安全起见，还是要再做一次这个事情
+                }
             }
-        }
-```
+    ```
 8. 如何判断SSR效果是不是正确：通过查看源码，因为这个是服务端打回给自己的模板
 9. lodash详解：`https://segmentfault.com/a/1190000015312430`
 
