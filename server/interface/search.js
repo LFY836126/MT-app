@@ -5,7 +5,7 @@ let router = new Router({
     // 定义一个前缀
     prefix:'/search'
 })
-const sign = '3e59babc3d4d2e7bc9a5b4fe302d574e'
+const sign = 'c0159e56b92b0f7e191b2228d917afc9'
 
 router.get('/top', async(ctx) =>{
   //     try {
@@ -80,6 +80,8 @@ router.get('/hotPlace', async (ctx)=>{
 
 router.get('/resultsByKeywords', async (ctx) =>{
     const {city, keyword} = ctx.query;
+    // count:一共多少条数据
+    // pois：数据
     let {status, data:{count, pois}} = await axios.get(`http://cp-tools.cn/search/resultsByKeywords`, {
         params:{
             city,

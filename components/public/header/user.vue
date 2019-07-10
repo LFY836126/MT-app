@@ -1,10 +1,12 @@
 <template>
 <!-- 登录部分：登录或者未登录 -->
     <div class="m-user">
+        <!-- 登录 -->
         <template v-if="user">
             欢迎你 <span class="username">{{user}}</span>
             <nuxt-link to="/exit" class="exit">退出</nuxt-link>
         </template>
+        <!-- 未登录 -->
         <template v-else>
             <nuxt-link to="/login" class="login">立即登录</nuxt-link>    
             <nuxt-link to="/register" class="register">注册</nuxt-link>    
@@ -25,9 +27,9 @@ export default {
        const {status, data:{user}} =  await this.$axios.get('/users/getUser')
     //    getUser返回值是一个user和一个email，所以解构的时候，status是axios最外层的一个对象，是获取http前状态的
     //    data里面的部分才是getUser真正返回的内容，也就是user和email
-    if(status === 200){
-        this.user = user
-    }
+        if(status === 200){
+            this.user = user
+        }
     }
 }
 </script>

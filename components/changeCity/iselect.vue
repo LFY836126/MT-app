@@ -73,7 +73,6 @@ export default {
                             value: item.name,
                         }
                     })
-                    console.log(self.cities[0]);
                     cb(self.cities.filter(item => item.value.indexOf(query) > -1));
                 }else{
                     cb([])
@@ -81,7 +80,7 @@ export default {
             }
         }, 200),
         handleSelect:function(item){
-            // this.$store.state.geo.setPosition.city = item.value;
+            this.$store.state.geo.setPosition.city = item.value;
             location.href="/"
         }
     },

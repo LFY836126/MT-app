@@ -61,6 +61,10 @@ export default {
   // 获取数据
   // 注意asyncData是在服务端执行的，不是在客户端执行的，所以获取数据的时候，利用ctx.query
   async asyncData(ctx){
+    // 在访问localhost:3000/detail.vue时的请求参数keyword,type
+    //   只能通过：let {keyword,type}=ctx.query，在服务器端获取到
+    //   而asyncData中正好是在服务器端执行的，
+    //   所以写在asyncData中
     let {keyword,type}=ctx.query;
     let {status,data:{product,more:list,login}}=await ctx.$axios.get('/search/products',{
       params:{

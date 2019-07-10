@@ -37,7 +37,7 @@ export default {
                 count: this.cart[0].count
             })
             // console.log('status');
-            console.log(this.cartNo + "  " + this.cart[0].price+ "  " +this.cart[0].count);
+            // console.log(this.cartNo + "  " + this.cart[0].price+ "  " +this.cart[0].count);
             if (status === 200 && code === 0) {
                 this.$alert(`恭喜您，已成功下单，订单号:${id}`, '下单成功', {
                 confirmButtonText: '确定',
@@ -49,6 +49,7 @@ export default {
         }
     },
     computed:{
+        // 所有订单总价：
         total(){
             // 当list组件中scope.row.count值发生改变，就会导致data中的cart中的count值发生改变，所以total的值就会改变
             let total = 0;
@@ -63,11 +64,12 @@ export default {
             id:ctx.query.id
             })
             if(status===200&&code===0&&name){
+        
             return {
                 cart:[{
-                name,
-                price,
-                count:1
+                    name,
+                    price,
+                    count:1
                 }],
                 cartNo:ctx.query.id
             }

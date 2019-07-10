@@ -1,8 +1,8 @@
 <template>
     <!-- cartData对应Data数据中的cartData -->
      <el-table
-    :data="cartData"
-    style="width: 980px">
+        :data="cartData"
+        style="width: 980px">
         <!-- prop的值对应cartData中每个子项的一个key值 ，它们之间是有一个关联的-->
         <el-table-column
             prop="name"
@@ -14,7 +14,8 @@
             width="132"/>
 
         <!-- prop：因为prop是单向传递的，不能双向绑定，但是我们这里是既需要展示，又能改变的，所以不用prop传递 -->
-        <!-- v-model="scope.row.count" ：就是完成prop没完成的功能，可以实现双向绑定-，scope.row表示的是当前行的变量-->
+        <!-- v-model="scope.row.count" ：就是完成prop没完成的功能，可以实现双向绑定-，s
+        cope.row表示的是当前行的变量:，在这里指的就是data中的cartData-->
         <el-table-column
             label="数量"
             width="212">

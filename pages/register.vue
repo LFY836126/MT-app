@@ -49,13 +49,21 @@ export default {
     layout:'blank',
     data(){
         return{
+            // 验证码提示信息
             statusMsg:'',
+            // 错误提示信息
             error:'',
+            // 表单相关信息
             ruleForm:{
+                // 名字
                 name:'',
+                // 验证码
                 code:'',
+                // 密码
                 pwd:'',
+                // 确认密码
                 cpwd:'',
+                // 邮箱
                 email:'',
             },
             // 校验规则
@@ -139,7 +147,7 @@ export default {
                     if(status === 200 && data && data.code === 0){
                         let count = 60;
                         self.statusMsg = `验证码已发送，剩余${count--}秒`
-                        // 定时器
+                        // 定时器,倒计时60s
                         self.timerid = setInterval(function(){
                             self.statusMsg = `验证码已发送，剩余${count--}秒`
                             if(count === 0){
@@ -163,7 +171,7 @@ export default {
                         // 将username进行编码，因为username有可能是中文名称
                         username: window.encodeURIComponent(self.ruleForm.name),
                         // 将密码进行加密，利用crypto-js,这个库是非常常见的与加密有关的库,先下载(npm i crypto-js)再引进(import CryptoJS from 'crypto-js')
-                        // 利用MD5将密码进行加密，不过加密后返回来的是数组，所以一定要用toString方法
+                        // 利用MD5将密码进行加密，加密后返回来的是数组，所以一定要用toString方法
                         password: CryptoJS.MD5(self.ruleForm.pwd).toString(),
                         email: self.ruleForm.email,
                         code: self.ruleForm.code
@@ -178,7 +186,7 @@ export default {
                         }else{
                             self.error = `服务器出错，错误码${status}`
                         }
-                        // 定时清空error
+                        // 如果不清除，再显示会造成误导，所以定时清空error
                         setTimeout(function(){
                             self.error = '';
                         }, 1500)

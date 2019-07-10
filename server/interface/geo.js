@@ -7,7 +7,7 @@ let router = new Router({
     // 定义一个前缀
     prefix:'/geo'
 })
-const sign = '3e59babc3d4d2e7bc9a5b4fe302d574e'
+const sign = 'c0159e56b92b0f7e191b2228d917afc9'
 
 router.get('/getPosition', async(ctx) =>{
     let {status, data: {province, city}} = await axios.get(`http://cp-tools.cn/geo/getPosition?sign=${sign}`)

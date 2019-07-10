@@ -60,7 +60,7 @@ export default {
         map.addControl(toolbar)
         // marker漂浮物，就是地图上看见的类似定位 图标的东西，
         let marker = new window.AMap.Marker({
-            // 图标固定地址，不能写错
+            // 图标固定地址 ，不能写错
           icon: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
           position: self.point
         })

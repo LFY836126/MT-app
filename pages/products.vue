@@ -36,6 +36,7 @@ export default {
       types:[],
       areas:[],
       keyword:'',
+      // 地图的经纬度
       point:[]
     }
   },
@@ -43,6 +44,8 @@ export default {
   async asyncData(ctx){
     let keyword = ctx.query.keyword;
     let city = ctx.store.state.geo.position.city.replace('市','') || "哈尔滨";
+    // count:一共多少条数据
+    // pois：数据
     let {status,data:{count,pois}} = await ctx.$axios.get('/search/resultsByKeywords',{
       params:{
         keyword,
@@ -53,7 +56,7 @@ export default {
     params:{
       // city:ctx.query.city.replace('市','') || "北京",
       city,
-      sign:'3e59babc3d4d2e7bc9a5b4fe302d574e',
+      sign:'c0159e56b92b0f7e191b2228d917afc9',
       }
     })
     // let {status:status2,data:{areas,types}} = await ctx.$axios.get('/categroy/crumbs',{

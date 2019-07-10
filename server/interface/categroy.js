@@ -4,7 +4,7 @@ import Province from '../dbs/models/province'
 
 let router = new Router({prefix: '/categroy'})
 
-const sign = '3e59babc3d4d2e7bc9a5b4fe302d574e';
+const sign = 'c0159e56b92b0f7e191b2228d917afc9';
 
 router.get('/crumbs',async (ctx)=>{
 

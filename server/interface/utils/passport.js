@@ -25,7 +25,7 @@ passport.use(new LocalStrategy(async function(username, password, done){
     }
 }))
 
-// 如果每次用户进来的时候，都自动通过session去验证
+// 每次用户进来的时候，都自动通过session去验证
 // passport提供的这两个api是固定用法，是库里封装好的api
 
 // 序列化:序列化指的是把用户对象存到session里

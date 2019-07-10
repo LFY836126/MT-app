@@ -2,7 +2,7 @@
 //  借助redis，实现当a和b同时发验证码的是时候，能够将用户和验证码对应上
  import Redis from 'koa-redis'
 //  Redis作用:它有个一工具，就是我在node中用刚才注册的SMTP服务，如何给对方的填的一个邮箱发邮件，就是在node上，怎么用自己的邮箱给他的邮箱发程序
-// 就是在邮箱验证的时候，我们除了在邮箱部分开启smtp(注册的smtp服务),还要在node上安装一个对应的应用程序
+// 就是在邮箱验证的时候，我们除了在邮箱部分开启smtp(注册的smtp服务),还要在node上安装一个对应的应用程序nodemailer
 import nodeMailer from 'nodemailer'
 import User from '../dbs/models/users.js'
 import Email from '../dbs/config'

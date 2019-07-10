@@ -1,13 +1,16 @@
 <template>
     <div class="m-life">
         <el-row :gutter="0">
+            <!-- 中间轮播图 -->
             <el-col :span="14">
                 <Lsilder></Lsilder>
             </el-col>
+            <!-- 休闲生活图片 -->
             <el-col :span="4">
                 <!-- <img src="http://p0.meituan.net/codeman/e473bb428f070321269b23370ff02ba956209.jpg" alt=""> -->
                 <div class="m-life-pic"/>
             </el-col>
+            <!-- Hi你好，注册 登录...... -->
             <el-col :span="6">
                 <div class="m-life-login">
                     <h4><img src="//s0.meituan.net/bs/fe-web-meituan/2d05c2b/img/avatar.jpg" alt=""></h4>
@@ -18,15 +21,19 @@
             </el-col>
         </el-row>
         <el-row :gutter="0">
+            <!-- 住酒店 -->
             <el-col :span="7">
                 <div class="m-life-hotel"></div>
             </el-col>
+            <!-- 涨姿势 -->
             <el-col :span="7">
                 <div class="m-life-music"></div>
             </el-col>
+            <!-- 我是商家 -->
             <el-col :span="4">
                 <div class="m-life-coop"></div>
             </el-col>
+            <!-- 二维码 ，美团APP手机版.....-->
             <el-col :span="6">
                 <div class="m-life-downapp">
                     <img src="//s1.meituan.net/bs/fe-web-meituan/60ac9a0/img/download-qr.png" alt="下载APP">

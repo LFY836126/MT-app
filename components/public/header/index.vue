@@ -1,6 +1,7 @@
 <template>
     <div class="m-header">
         <!-- 用element布局工具完成布局 -->
+        <!-- 使用Element-UI布局`https://element.eleme.cn/#/zh-CN/component/layout`->分栏间隔 -->
         <el-row>
             <el-col>
                 <topBar></topBar>

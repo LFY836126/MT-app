@@ -52,6 +52,7 @@ router.post('/getCart', async ctx => {
   // try容错处理，对比上面的result新写法
   try {
     let result = await Cart.findOne({cartNo: id})
+
     ctx.body = {
       code: 0,
       data: result

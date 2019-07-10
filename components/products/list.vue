@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     navSelect: function () {
-      console.log('select')
+      // console.log('select')
     }
   }
 }

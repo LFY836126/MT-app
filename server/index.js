@@ -13,6 +13,7 @@ import json from 'koa-json'
 import dbConfig from './dbs/config'
 import passport from './interface/utils/passport'
 import users from './interface/users'
+
 import geo from './interface/geo'
 import search from './interface/search'
 import cart from './interface/cart'
@@ -30,6 +31,7 @@ app.use(session({
   prefix: 'mt:uid',
   store: new Redis() 
 }))
+// 扩展类型的配置
 app.use(bodyParser({
   extendTypes: ['json', 'form' , 'text']
 }))
