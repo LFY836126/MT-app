@@ -90,19 +90,19 @@ export default {
                 pwd:[{
                     required:true,message:'创建密码',trigger:'blur'
                 }],
-                cpwd:[{
-                    required:true,messsge:'确认密码',trigger:'blur'
-                },{
-                    // 二次验证，对比两次密码的内容，需要内置一个函数，支持验证函数的自定义
-                    // validator是一个函数，函数的第一个是rule规则，第二个是value值，第三个是回调
-                    validator:(rule, value, callback) => {
-                        if(value === ''){
-                            callback(new Error('请再次输入密码'))
-                        }else if(value != this.ruleForm.pwd){
-                            callback(new Error('两次输入密码不一致'))
-                        }else{
-                            callback()
-                        }
+                cpwd:[
+                    { required:true,messsge:'确认密码',trigger:'blur' },
+                    {
+                        // 二次验证，对比两次密码的内容，需要内置一个函数，支持验证函数的自定义
+                        // validator是一个函数，函数的第一个是rule规则，第二个是value值，第三个是回调
+                        validator:(rule, value, callback) => {
+                            if(value === ''){
+                                callback(new Error('请再次输入密码'))
+                            }else if(value != this.ruleForm.pwd){
+                                callback(new Error('两次输入密码不一致'))
+                            }else{
+                                callback()
+                            }
                     },
                     trigger:'blur'
                 }]     
@@ -117,7 +117,7 @@ export default {
             if(self.timerid){
                 return false
             }
-            // 验证用户名有没有通过规则校验，有值表示错误，没有表示正确
+            // 验证用户名有没有通过规则校验，有值表示错误，没有表示正确,valid是从表单得到的用户的输入值
             this.$refs['ruleForm'].validateField('name', (valid) =>{  
                 namePass = valid
             })

@@ -27,10 +27,10 @@
             { "value": "三全鲜食（北新泾店）", "address": "长宁区新渔路144号" },
         -->
         <el-autocomplete
-        v-model="input"
-        :fetch-suggestions="querySearchAsync"
-        placeholder="请输入城市中文名或拼音"
-        @select="handleSelect"
+            v-model="input"
+            :fetch-suggestions="querySearchAsync"
+            placeholder="请输入城市中文名或拼音"
+            @select="handleSelect"
         ></el-autocomplete>
     </div>
 </template>

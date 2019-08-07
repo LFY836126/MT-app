@@ -27,7 +27,7 @@ router.post('/signup', async(ctx) =>{
     // 注意: post方式如何去获取post方式上传的数据，是要用ctx.request.body这个方法 
 
     // 拿到数据验证
-    // 在nodemnail发验证码的时候会在redis上去存了一下，然后在这里要把存的东西拿出来，做对比
+    // 在nodemail发验证码的时候会在redis上去存了一下，然后在这里要把存的东西拿出来，做对比
     if(code){
         const saveCode = await Store.hget(`nodemail:${username}`, 'code')
         // 过期时间，不能让验证码无限有效
@@ -139,7 +139,7 @@ router.post('/verify', async(ctx, next) => {
     // 获取用户和验证码过期时间
     let username = ctx.request.body.username;
     const saveExpire = await Store.hget(`nodemail:${username}`, 'expire')
-    // 拦截，避免频繁的刷那个接口
+    // 拦截，避免频繁的刷那个接口：一定时间内再次点击，只执行一次：函数节流
     if(saveExpire && new Date().getTime() - saveExpire < 0){
         ctx.body = {
             code: -1,
@@ -150,6 +150,9 @@ router.post('/verify', async(ctx, next) => {
     // 开启一个 SMTP 连接池
     let transporter = nodeMailer.createTransport({
         host : Email.smtp.host,
+        //   端口465和587用于电子邮件客户端到电子邮件服务器通信 - 发送电子邮件。
+        //   端口465用于smtps SSL加密在任何SMTP级别通信之前自动启动。
+        //   端口587用于msa
         port: 587,
         // secure:true   --> for port 465
         // secure:false  --> for port 587

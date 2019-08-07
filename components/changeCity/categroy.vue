@@ -54,7 +54,7 @@ export default {
                 d[p].push(item.name);
             })
 
-            //Object.entries(d)： 将d这个对象变为一个数组[ [key, value], [key, value] ]
+            //Object.entries(d)： 将d这个对象变为一个数组[ [title, city:[]], [title, city:[]] ]
             for(let [k, v] of Object.entries(d)){
                 // 这个k和v就是[key, value]
                 // for of 上网查

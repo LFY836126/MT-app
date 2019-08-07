@@ -48,8 +48,8 @@ export default {
     window.onmaploaded = () => {
         // 地图控件的类，实例化的对象
       let map = new window.AMap.Map(self.id, {
-        resizeEnable: true,
-        zoom: 11,
+        resizeEnable: true, //自适应大小
+        zoom: 11,          //初始视窗
         center: self.point
       })
       self.map = map
@@ -62,7 +62,7 @@ export default {
         let marker = new window.AMap.Marker({
             // 图标固定地址 ，不能写错
           icon: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png',
-          position: self.point
+          position: self.point //此处根据页面数据可以直接传入经纬度进行描点
         })
         self.marker = marker
         marker.setMap(map)
