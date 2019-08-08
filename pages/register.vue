@@ -117,7 +117,7 @@ export default {
             if(self.timerid){
                 return false
             }
-            // 验证用户名有没有通过规则校验，有值表示错误，没有表示正确,valid是从表单得到的用户的输入值
+            // 验证用户名有没有通过规则校验，有值表示错误，没有表示正确
             this.$refs['ruleForm'].validateField('name', (valid) =>{  
                 namePass = valid
             })
